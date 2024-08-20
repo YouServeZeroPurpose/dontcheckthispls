@@ -1,0 +1,36 @@
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QLabel
+
+app = QApplication([])
+
+windows = []#чатгпт сказав що я дурненький і що нада тут цей список щоб вікна не закривались через 'garbage collection', якщо є простіший спосіб, будь ласка, напишіть мені як це зробити простіше
+
+def open_new_window():
+    win = QWidget()
+    win.resize(10101010, 1010)# це код морзе написаний як бінарний код. 1 = певна частинка часу коли діє сигнал та 0 частинка часу такої самої довжини як і 1 але без видачи сигналу. 10101010 = .... = H, 1010 = .. = I, тобто я написав HI
+    win.setWindowTitle(f'(можна порожнє) {len(windows) + 1}')
+
+
+    layout = QVBoxLayout()
+    label1 = QLabel('НЕ МОЖНА >:D', win)
+    layout.addWidget(label1)
+
+    win.show()
+    windows.append(win)
+
+main_window = QWidget()
+main_window.resize(300, 300)
+main_window.setWindowTitle('Програма')
+
+button = QPushButton('як хочете', main_window)
+label = QLabel('Натисни на кнопку', main_window, alignment = Qt.AlignCenter)
+
+button.clicked.connect(open_new_window)
+
+layout = QVBoxLayout(main_window)
+layout.addWidget(label)
+layout.addWidget(button)
+
+main_window.show()
+
+app.exec_()
